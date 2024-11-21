@@ -1,12 +1,12 @@
 /********************************************************************************
-   @file    sensor_ultra.hpp
+   @file    sensor_ultra.h
    @brief   Driver para el sensor ultrasónico
    @author  Paget, Milagros
   	  	  	Voss, Maria de Guadalupe
 **********************************************************************************/
 
-#ifndef _SENSOR_ULTRA_HPP_
-#define _SENSOR_ULTRA_HPP_
+#ifndef _BALANZA_HPP_
+#define _BALANZA_HPP_
 
 /*******************************************************************************
  * INCLUDE HEADER FILES
@@ -15,12 +15,12 @@
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
  ******************************************************************************/
-#define MAX_distance 20 //en cm
+
 
 /*******************************************************************************
  * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
  ******************************************************************************/
-typedef enum{SENSOR_1, SENSOR_2}; 
+typedef enum{BALANZA_1, BALANZA_2}; 
 
 /*******************************************************************************
  * VARIABLE PROTOTYPES WITH GLOBAL SCOPE
@@ -34,15 +34,15 @@ typedef enum{SENSOR_1, SENSOR_2};
  * @brief Inicializa el sensor de ultrasonido
  * @return void
  */
-void initSensorUltra(void); 
+void initBalanza(void); 
 
 /**
  * @brief Inicializa el sensor de ultrasonido
  * @return void
  */
-bool sensorUpdate(int sensorNum);
+bool balanzaUpdate(int balanzaNum);
 
 /*******************************************************************************
  ******************************************************************************/
 
-#endif // _SENSOR_ULTRA_HPP_
+#endif // _BALANZA_HPP_

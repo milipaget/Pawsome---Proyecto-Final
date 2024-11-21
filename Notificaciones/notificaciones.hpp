@@ -1,12 +1,13 @@
+
 /********************************************************************************
-   @file    sensor_ultra.hpp
-   @brief   Driver para el sensor ultrasónico
+   @file    notificaciones.hpp
+   @brief   Notificaciones
    @author  Paget, Milagros
   	  	  	Voss, Maria de Guadalupe
 **********************************************************************************/
 
-#ifndef _SENSOR_ULTRA_HPP_
-#define _SENSOR_ULTRA_HPP_
+#ifndef _NOTIFICACIONES_HPP_
+#define _NOTIFICACIONES_HPP_
 
 /*******************************************************************************
  * INCLUDE HEADER FILES
@@ -15,12 +16,10 @@
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
  ******************************************************************************/
-#define MAX_distance 20 //en cm
 
 /*******************************************************************************
  * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
  ******************************************************************************/
-typedef enum{SENSOR_1, SENSOR_2}; 
 
 /*******************************************************************************
  * VARIABLE PROTOTYPES WITH GLOBAL SCOPE
@@ -34,15 +33,15 @@ typedef enum{SENSOR_1, SENSOR_2};
  * @brief Inicializa el sensor de ultrasonido
  * @return void
  */
-void initSensorUltra(void); 
+void initNotificaciones(void);
 
 /**
  * @brief Inicializa el sensor de ultrasonido
  * @return void
  */
-bool sensorUpdate(int sensorNum);
+void notify(char* message);
 
 /*******************************************************************************
  ******************************************************************************/
 
-#endif // _SENSOR_ULTRA_HPP_
+#endif // _NOTIFICACIONES_HPP_

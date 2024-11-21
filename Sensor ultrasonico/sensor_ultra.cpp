@@ -1,15 +1,17 @@
 #include "sensor_ultra.hpp"
+#include "../Pinout/pinout.hpp"
 #include <Arduino.h>
 
-void setup() {
+void initSensorUltra() {
   Serial.begin(9600);
   pinMode(PIN_led, OUTPUT);
   pinMode(PIN_trigger, OUTPUT);
-  pinMode(PIN_echo, INPUT);
+  pinMode(PIN_echo1, INPUT);
+  pinMode(PIN_echo2, INPUT);
   digitalWrite(PIN_trigger, LOW);
 }
 
-void loop() {
+bool sensorUpdate(int sensorNum) {
   long t; // tiempo que demora en llegar el eco
   long d; // distancia en cm
 
@@ -17,18 +19,19 @@ void loop() {
   delayMicroseconds(10);
   digitalWrite(PIN_trigger, LOW);
 
-  t = pulseIn(PIN_echo, HIGH);
+  if(sensorNum == SENSOR_1){
+    t = pulseIn(PIN_echo1, HIGH);
+  }
+  else if(sensorNum == SENSOR_2){
+    t = pulseIn(PIN_echo2, HIGH);
+  }
+
   d = t/59;
 
-  if(d<10){
-    digitalWrite(PIN_led, HIGH);
+  if(d<MAX_distance){
+    return true;
   }
   else{
-    digitalWrite(PIN_led, LOW);
+    return false;
   }
-
-  Serial.print("Distancia: ");
-  Serial.print(d);
-  Serial.println();
-  delay(100);
 }
