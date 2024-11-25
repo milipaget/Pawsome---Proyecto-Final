@@ -1,35 +1,31 @@
 /********************************************************************************
-   @file    balanza.hpp
-   @brief   Driver para la balanza
+   @file    sensor_infra.hpp
+   @brief   Driver para el sensor infrarrojo
    @author  Paget, Milagros
-  	  	  	   Voss, Maria de Guadalupe
+  	  	  	Voss, Maria de Guadalupe
 **********************************************************************************/
 
-#ifndef _BALANZA_HPP_
-#define _BALANZA_HPP_
-
-/*******************************************************************************
- * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
- ******************************************************************************/
-typedef enum{BALANZA_1, BALANZA_2}; 
+#ifndef _SENSOR_INFRA_HPP_
+#define _SENSOR_INFRA_HPP_
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES WITH GLOBAL SCOPE
  ******************************************************************************/
 
 /**
- * @brief Inicializa el sensor de ultrasonido
+ * @brief Inicializa el sensor de infrarrojo
  * @return void
  */
-void initBalanza(void); 
+void initSensorInfrarrojo(void); 
 
 /**
- * @brief Inicializa el sensor de ultrasonido
- * @return void
+ * @brief Verifica si el sensor detecta algo. 
+ * @return bool
  */
-bool updateBalanza(int balanzaNum);
+bool updateSensorInfrarrojo(void);
 
 /*******************************************************************************
  ******************************************************************************/
 
-#endif // _BALANZA_HPP_
+#endif // _SENSOR_INFRA_HPP_
+

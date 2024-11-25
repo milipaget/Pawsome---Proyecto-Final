@@ -1,10 +1,7 @@
 /*******************************************************************************
    @file     vumeter.h
    @brief    vumeter driver
-   @author  Grupo 4 Laboratorio de Microprocesadores:
-  	  	  	Corcos, Manuel
-  	  	  	Lesiuk, Alejandro
-  	  	  	Paget, Milagros
+   @author  Paget, Milagros
   	  	  	Voss, Maria de Guadalupe
 ********************************************************************************/
 

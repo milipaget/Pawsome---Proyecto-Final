@@ -1,17 +1,34 @@
+/********************************************************************************
+   @file    sensor_ultra.hpp
+   @brief   Driver para el sensor ultrasónico
+   @author  Paget, Milagros
+  	  	  	   Voss, Maria de Guadalupe
+**********************************************************************************/
+
+/*******************************************************************************
+ * INCLUDE HEADER FILES
+ ******************************************************************************/
 #include "sensor_ultra.hpp"
 #include "../Pinout/pinout.hpp"
 #include <Arduino.h>
 
-void initSensorUltra() {
+/*******************************************************************************
+ * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
+ ******************************************************************************/
+#define MAX_distance 20 //en cm
+
+/*******************************************************************************
+ * FUNCTION DEFINITIONS WITH GLOBAL SCOPE
+ ******************************************************************************/
+void initSensorUltrasonico() {
   Serial.begin(9600);
-  pinMode(PIN_led, OUTPUT);
   pinMode(PIN_trigger, OUTPUT);
   pinMode(PIN_echo1, INPUT);
   pinMode(PIN_echo2, INPUT);
   digitalWrite(PIN_trigger, LOW);
 }
 
-bool sensorUpdate(int sensorNum) {
+bool updateSensorUltrasonico(int sensorNum) {
   long t; // tiempo que demora en llegar el eco
   long d; // distancia en cm
 

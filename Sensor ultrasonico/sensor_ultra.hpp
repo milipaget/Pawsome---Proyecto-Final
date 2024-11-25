@@ -2,29 +2,16 @@
    @file    sensor_ultra.hpp
    @brief   Driver para el sensor ultrasónico
    @author  Paget, Milagros
-  	  	  	Voss, Maria de Guadalupe
+  	  	  	   Voss, Maria de Guadalupe
 **********************************************************************************/
 
 #ifndef _SENSOR_ULTRA_HPP_
 #define _SENSOR_ULTRA_HPP_
 
 /*******************************************************************************
- * INCLUDE HEADER FILES
- ******************************************************************************/
-
-/*******************************************************************************
- * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
- ******************************************************************************/
-#define MAX_distance 20 //en cm
-
-/*******************************************************************************
  * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
  ******************************************************************************/
 typedef enum{SENSOR_1, SENSOR_2}; 
-
-/*******************************************************************************
- * VARIABLE PROTOTYPES WITH GLOBAL SCOPE
- ******************************************************************************/
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES WITH GLOBAL SCOPE
@@ -34,13 +21,13 @@ typedef enum{SENSOR_1, SENSOR_2};
  * @brief Inicializa el sensor de ultrasonido
  * @return void
  */
-void initSensorUltra(void); 
+void initSensorUltrasonico(void); 
 
 /**
- * @brief Inicializa el sensor de ultrasonido
- * @return void
+ * @brief Actualiza si la distancia que detecta el sensor es mayor a un cierto valor.
+ * @return bool
  */
-bool sensorUpdate(int sensorNum);
+bool updateSensorUltrasonico(int sensorNum);
 
 /*******************************************************************************
  ******************************************************************************/
