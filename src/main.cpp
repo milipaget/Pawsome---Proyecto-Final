@@ -17,6 +17,7 @@
 #include "../include/FSM/fsm.hpp"
 #include <stdio.h>
 #include <stdint.h>
+#include <Arduino.h>
 
 /*******************************************************************************
  * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
