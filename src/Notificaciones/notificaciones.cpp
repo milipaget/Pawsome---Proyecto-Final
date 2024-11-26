@@ -1,29 +1,25 @@
 /********************************************************************************
-   @file    sensor_infra.cpp
-   @brief   Driver para el sensor infrarrojo
+   @file    notificaciones.cpp
+   @brief   Notificaciones
    @author  Paget, Milagros
-  	  	  	Voss, Maria de Guadalupe
+  	  	    Voss, Maria de Guadalupe
 **********************************************************************************/
 
 /*******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
-#include "sensor_infra.hpp"
-#include "../Pinout/pinout.hpp"
+#include "../include/Notificaciones/notificaciones.hpp"
 #include <Arduino.h>
 
 /*******************************************************************************
- * FUNCTION DEFINITIONS WITH GLOBAL SCOPE
+ * FUNCTION DEFINITION WITH GLOBAL SCOPE
  ******************************************************************************/
-void initSensorInfrarrojo() {
-    Serial.begin(9600);
-    pinMode(PIN_infrarrojo, INPUT);
+
+void initNotificaciones(void) {
+    // Inicializa la comunicación serie
+    Serial.begin(115200);
 }
 
-bool updateSensorInfrarrojo() {
-    int valor = digitalRead(PIN_infrarrojo);
-    if(valor == LOW){
-        return true;
-    }
-    return false;
+void notify(char* message) {
+    Serial.println(message);
 }

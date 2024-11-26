@@ -8,9 +8,9 @@
 /*******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
-#include "balanza.hpp"
+#include "../include/Balanza/balanza.hpp"
 #include "HX711.h"
-#include "../Pinout/pinout.hpp"
+#include "../include/Pinout/pinout.hpp"
 
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
@@ -53,6 +53,7 @@ bool updateBalanza(int balanzaNum) {
         }
         return true;
     }
+    return true;
   /*celda.power_down();
   delay(3000);
   celda.power_up();*/

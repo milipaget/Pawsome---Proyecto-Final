@@ -12,16 +12,20 @@
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
  ******************************************************************************/
 /*Sensores de ultrasonido*/
-#define PIN_trigger 13  //uso el mismo trigger para ambos sensores
+#define PIN_trigger  13  //uso el mismo trigger para ambos sensores
 #define PIN_echo1 12
 #define PIN_echo2 15
 /*Sensor infrarrojo*/
-#define PIN_infrarrojo 8
+#define PIN_infrarrojo  22
 /*Balanzas*/
-#define PIN_DT1 2
-#define PIN_SCK1 3
-#define PIN_DT2 4
-#define PIN_SCK2 5
+#define PIN_DT1   16
+#define PIN_SCK1  17
+#define PIN_DT2   18
+#define PIN_SCK2  19
+/*Motor*/
+#define PIN_ENA   25
+#define PIN_IN1   26
+#define PIN_IN2   27
 
 /*******************************************************************************
  ******************************************************************************/

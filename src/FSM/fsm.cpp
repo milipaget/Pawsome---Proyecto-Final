@@ -9,17 +9,18 @@
  * INCLUDE HEADER FILES
  ******************************************************************************/
 #include <stdio.h>
-#include "fsm.hpp"
-#include "../Sensor ultrasonico/sensor_ultra.hpp"
-#include "../Balanza/balanza.hpp"
-#include "../Notificaciones/notificaciones.hpp"
-#include "../Sensor infrarojo/sensor_infra.hpp"
+#include "../include/FSM/fsm.hpp"
+#include "../include/Sensor ultrasonico/sensor_ultra.hpp"
+#include "../include/Balanza/balanza.hpp"
+#include "../include/Notificaciones/notificaciones.hpp"
+#include "../include/Sensor infrarrojo/sensor_infra.hpp"
+#include "../include/Motor/motor.hpp"
 
 /*******************************************************************************
  * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
  ******************************************************************************/
-typedef enum{NO_FOOD, NO_WATER, NO_FOOD_NO_WATER};
-typedef enum{NO_ERROR, NOT_FED, NOT_WATERED, NOT_EVERYTHING, EMPTY_FOOD, EMPTY_WATER, EMPTY_EVERYTHING};
+enum{NO_FOOD, NO_WATER, NO_FOOD_NO_WATER};
+enum{NO_ERROR, NOT_FED, NOT_WATERED, NOT_EVERYTHING, EMPTY_FOOD, EMPTY_WATER, EMPTY_EVERYTHING};
 /*Enumeración de estados posibles:
     1. IDLE: Cambia de estado dependiendo del modo de funcionamiento activado. Si está en modo A DEMANDA se
         debe fijar si la mascota se encuentra frente al dispenser. En caso de estar en modo POR TIEMPO, se 
@@ -35,7 +36,7 @@ typedef enum{NO_ERROR, NOT_FED, NOT_WATERED, NOT_EVERYTHING, EMPTY_FOOD, EMPTY_W
         que estén vacíos se pone el flag correspondiente en FALSE y se pasa a REPORT_ERROR.
     5. REPORT_ERROR: Se notifica al dueño del error ocurrido.
 */
-typedef enum{IDLE, FILL_PLATES, PLATES_EMPTY, CHECK_CONTEINERS, REPORT_ERROR};
+enum{IDLE, FILL_PLATES, PLATES_EMPTY, CHECK_CONTEINERS, REPORT_ERROR};
 
 /*******************************************************************************
  * VARIABLE PROTOTYPES WITH LOCAL SCOPE
@@ -150,19 +151,20 @@ void FSM_GetInitState(void){
 /*******************************************************************************
  * FUNCTION DEFINITIONS WITH LOCAL SCOPE
  ******************************************************************************/
-static void do_nothing(void){}
+//static void do_nothing(void){}
 
 static void startFilling(void){
     switch (balanzaState)
     {
     case NO_FOOD:
-        //función que hace que el motor gire :)
+        turnMotor();
         break;
     case NO_WATER:
         //función que hace que la válvula se abra :)
         break;
     case NO_FOOD_NO_WATER:
         //función que hace que el motor gire y la válvula se abra:)
+        turnMotor();
         break;
     
     default:

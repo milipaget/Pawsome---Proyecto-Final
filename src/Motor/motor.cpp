@@ -1,41 +1,42 @@
 /*******************************************************************************
-   @file     vumeter.h
-   @brief    vumeter driver
+   @file    motor.cpp
+   @brief   Driver del motor
    @author  Paget, Milagros
   	  	  	Voss, Maria de Guadalupe
 ********************************************************************************/
 
-#ifndef _VUMETER_H_
-#define _VUMETER_H_
-
 /*******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
+#include "../include/Motor/motor.hpp"
+#include "Arduino.h"
+#include "../include/Pinout/pinout.hpp"
 
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
  ******************************************************************************/
-
-
-/*******************************************************************************
- * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
- ******************************************************************************/
+#define MAX_time    3000//en milisegundos
 
 /*******************************************************************************
- * VARIABLE PROTOTYPES WITH GLOBAL SCOPE
+ * FUNCTION DEFINITIONS WITH GLOBAL SCOPE
  ******************************************************************************/
+void initMotor(void){
+    pinMode(PIN_IN1, OUTPUT);
+    pinMode(PIN_IN2, OUTPUT);
+    pinMode(PIN_ENA, OUTPUT);
+    /* IN1|  HIGH   | LOW
+       IN2|   LOW   | HIGH
+          |IZQUIERDA|DERECHA
+    */
+    digitalWrite(PIN_IN1, LOW); //Estos pines podrían ir a masa y vcc
+    digitalWrite(PIN_IN2, HIGH); 
+}
+
+void turnMotor(void){
+    digitalWrite(PIN_ENA, HIGH);
+    delay(MAX_time);
+    digitalWrite(PIN_ENA, LOW);
+}
 
 /*******************************************************************************
- * FUNCTION PROTOTYPES WITH GLOBAL SCOPE
  ******************************************************************************/
-
-/**
- * @brief Initialize vumeter, changing led colors and starting vumeter in "on" mode.
- * @return void
- */
-
-
-/*******************************************************************************
- ******************************************************************************/
-
-#endif // _VUMETER_H_

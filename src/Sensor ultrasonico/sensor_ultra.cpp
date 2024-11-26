@@ -8,8 +8,8 @@
 /*******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
-#include "sensor_ultra.hpp"
-#include "../Pinout/pinout.hpp"
+#include "../include/Sensor Ultrasonico/sensor_ultra.hpp"
+#include "../include/Pinout/pinout.hpp"
 #include <Arduino.h>
 
 /*******************************************************************************
@@ -29,8 +29,8 @@ void initSensorUltrasonico() {
 }
 
 bool updateSensorUltrasonico(int sensorNum) {
-  long t; // tiempo que demora en llegar el eco
-  long d; // distancia en cm
+  long t = 0; // tiempo que demora en llegar el eco
+  long d = 0; // distancia en cm
 
   digitalWrite(PIN_trigger, HIGH);
   delayMicroseconds(10);

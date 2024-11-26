@@ -1,17 +1,17 @@
 /********************************************************************************
-   @file    balanza.hpp
-   @brief   Driver para la balanza
+   @file    sensor_ultra.hpp
+   @brief   Driver para el sensor ultrasónico
    @author  Paget, Milagros
   	  	  	   Voss, Maria de Guadalupe
 **********************************************************************************/
 
-#ifndef _BALANZA_HPP_
-#define _BALANZA_HPP_
+#ifndef _SENSOR_ULTRA_HPP_
+#define _SENSOR_ULTRA_HPP_
 
 /*******************************************************************************
  * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
  ******************************************************************************/
-typedef enum{BALANZA_1, BALANZA_2}; 
+enum{SENSOR_1, SENSOR_2}; 
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES WITH GLOBAL SCOPE
@@ -21,15 +21,15 @@ typedef enum{BALANZA_1, BALANZA_2};
  * @brief Inicializa el sensor de ultrasonido
  * @return void
  */
-void initBalanza(void); 
+void initSensorUltrasonico(void); 
 
 /**
- * @brief Inicializa el sensor de ultrasonido
- * @return void
+ * @brief Actualiza si la distancia que detecta el sensor es mayor a un cierto valor.
+ * @return bool
  */
-bool updateBalanza(int balanzaNum);
+bool updateSensorUltrasonico(int sensorNum);
 
 /*******************************************************************************
  ******************************************************************************/
 
-#endif // _BALANZA_HPP_
+#endif // _SENSOR_ULTRA_HPP_
