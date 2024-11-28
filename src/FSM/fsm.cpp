@@ -15,6 +15,7 @@
 #include "../include/Notificaciones/notificaciones.hpp"
 #include "../include/Sensor infrarrojo/sensor_infra.hpp"
 #include "../include/Motor/motor.hpp"
+#include <Arduino.h>
 
 /*******************************************************************************
  * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
@@ -31,12 +32,12 @@ enum{NO_ERROR, NOT_FED, NOT_WATERED, NOT_EVERYTHING, EMPTY_FOOD, EMPTY_WATER, EM
     3. PLATES_EMPTY: En este estado debe chequearse si hay comida/agua en los contenedores. Si no hay
         comida/agua se pasa directamente a REPORT_ERROR, en cambio si hay se pasa al estado CHECKCONTAINER
         y se dispensa la comida/agua.
-    4. CHECK_CONTEINERS: En este estado chequeamos si el contenedor (luego de dar comida/agua) sigue teniendo.
+    4. CHECK_CONTAINERS: En este estado chequeamos si el contenedor (luego de dar comida/agua) sigue teniendo.
         En caso de tener comida se pone foodAvailable y/o waterAvailable en TRUE y se pasa a IDLE. En caso de
         que estén vacíos se pone el flag correspondiente en FALSE y se pasa a REPORT_ERROR.
     5. REPORT_ERROR: Se notifica al dueño del error ocurrido.
 */
-enum{IDLE, FILL_PLATES, PLATES_EMPTY, CHECK_CONTEINERS, REPORT_ERROR};
+enum{IDLE, FILL_PLATES, PLATES_EMPTY, CHECK_CONTAINERS, REPORT_ERROR};
 
 /*******************************************************************************
  * VARIABLE PROTOTYPES WITH LOCAL SCOPE
@@ -106,13 +107,16 @@ void fsm(bool mode){
     switch (currentState)
     {
     case IDLE:
-        if(mode?checkTimer():findPet()){
+        /*if(mode?checkTimer():findPet())*/
+        if(findPet()){
             currentState = FILL_PLATES;
+            Serial.println("Paso a FILL_PLATES :P");
         }
         break;
     case FILL_PLATES:
         if(!weightPlates()){
             currentState = PLATES_EMPTY;
+            Serial.println("Paso a PLATES_EMPTY :P");
         }
         else{
             currentState = IDLE;
@@ -120,16 +124,18 @@ void fsm(bool mode){
         break;
     case PLATES_EMPTY:
         if(checkAvailability()){
-            currentState = CHECK_CONTEINERS;
+            currentState = CHECK_CONTAINERS;
+            Serial.println("Paso a CHECK_CONTAINERS :P");
             startFilling();
         }
         else{
             currentState = REPORT_ERROR;
         }
         break;
-    case CHECK_CONTEINERS:
+    case CHECK_CONTAINERS:
         if(!isThereSomething()){
             currentState = REPORT_ERROR;
+            Serial.println("Paso a REPORT_ERROR :P");
         }
         else{
             currentState = IDLE;
@@ -145,7 +151,7 @@ void fsm(bool mode){
 }
 
 void FSM_GetInitState(void){
- 	currentState = CHECK_CONTEINERS; //Para que inicialice el estado de foodAvailable y waterAvailable 
+ 	currentState = CHECK_CONTAINERS; //Para que inicialice el estado de foodAvailable y waterAvailable 
 }
 
 /*******************************************************************************
@@ -222,6 +228,7 @@ static bool checkTimer(void){
 static bool weightPlates(void){
     //Uso BALANZA_1 para comida y BALANZA_2 para agua
     if(updateBalanza(BALANZA_1)){
+        return true;
         if(updateBalanza(BALANZA_2)){
             return true;
         }

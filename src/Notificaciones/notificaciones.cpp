@@ -17,7 +17,7 @@
 
 void initNotificaciones(void) {
     // Inicializa la comunicación serie
-    Serial.begin(115200);
+    Serial.begin(9600);
 }
 
 void notify(char* message) {

@@ -54,9 +54,7 @@ bool updateBalanza(int balanzaNum) {
         return true;
     }
     return true;
-  /*celda.power_down();
-  delay(3000);
-  celda.power_up();*/
+  
 }
 
 /*******************************************************************************

@@ -35,7 +35,9 @@ void initMotor(void){
 void turnMotor(void){
     digitalWrite(PIN_ENA, HIGH);
     delay(MAX_time);
+    Serial.println("motor on :D");
     digitalWrite(PIN_ENA, LOW);
+    Serial.println("chau motor");
 }
 
 /*******************************************************************************
