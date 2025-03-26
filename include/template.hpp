@@ -1,8 +1,8 @@
 /*******************************************************************************
-   @file     vumeter.hpp
-   @brief    vumeter driver
+   @file     
+   @brief    
    @author  Paget, Milagros
-  	  	  	Voss, Maria de Guadalupe
+  	  	  	   Voss, Maria de Guadalupe
 ********************************************************************************/
 
 #ifndef _VUMETER_H_
