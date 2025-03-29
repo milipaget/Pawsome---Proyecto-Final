@@ -24,6 +24,12 @@ void initMotor(void);
  */
 void turnMotor(void);
 
+/**
+ * @brief Prende el motor y su timer.
+ * @return void
+ */
+void motorON(int seconds);
+
 /*******************************************************************************
  ******************************************************************************/
 

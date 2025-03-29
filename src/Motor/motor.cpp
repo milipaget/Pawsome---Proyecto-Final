@@ -9,6 +9,7 @@
  * INCLUDE HEADER FILES
  ******************************************************************************/
 #include "../include/Motor/motor.hpp"
+#include "../include/Timer/timer.hpp"
 #include "Arduino.h"
 #include "../include/Pinout/pinout.hpp"
 
@@ -16,6 +17,16 @@
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
  ******************************************************************************/
 #define MAX_time    3000//en milisegundos
+
+/*******************************************************************************
+ * LOCAL FUNCTION DEFINITION
+ ******************************************************************************/
+void motorOFF(void);
+
+/*******************************************************************************
+ * VARIABLE PROTOTYPES WITH LOCAL SCOPE
+ ******************************************************************************/
+bool motorStatus;
 
 /*******************************************************************************
  * FUNCTION DEFINITIONS WITH GLOBAL SCOPE
@@ -30,6 +41,21 @@ void initMotor(void){
     */
     digitalWrite(PIN_IN1, LOW); //Estos pines podrían ir a masa y vcc
     digitalWrite(PIN_IN2, HIGH); 
+    motorStatus = false;
+}
+
+void motorON(int seconds){
+    if (!motorStatus){
+        digitalWrite(PIN_ENA, HIGH);
+        startTimer(MOTOR_TIMER, SEC_2_MSEC(seconds), motorOFF);
+        motorStatus = true;
+    }
+}
+
+void motorOFF(void){
+    digitalWrite(PIN_ENA, LOW);
+    Serial.println("chau motor");
+    motorStatus = false;
 }
 
 void turnMotor(void){
