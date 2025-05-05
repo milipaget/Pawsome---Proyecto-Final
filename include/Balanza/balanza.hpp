@@ -11,7 +11,7 @@
 /*******************************************************************************
  * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
  ******************************************************************************/
-enum{BALANZA_1, BALANZA_2}; 
+enum{BALANZA_COMIDA, BALANZA_AGUA}; 
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES WITH GLOBAL SCOPE
@@ -21,13 +21,15 @@ enum{BALANZA_1, BALANZA_2};
  * @brief Inicializa el sensor de ultrasonido
  * @return void
  */
-void initBalanza(void); 
+void initBalanzas(void); 
 
 /**
  * @brief Inicializa el sensor de ultrasonido
  * @return void
  */
 bool updateBalanza(int balanzaNum);
+
+float pesar(int balanzaNum);
 
 /*******************************************************************************
  ******************************************************************************/

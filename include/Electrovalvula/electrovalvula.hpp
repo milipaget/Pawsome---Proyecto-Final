@@ -1,23 +1,22 @@
 /*******************************************************************************
-   @file    timer.hpp 
-   @brief   timers 
+   @file    electrovalvula.hpp 
+   @brief   Funciones para controlar la electroválvula 
    @author  Paget, Milagros
   	  	  	   Voss, Maria de Guadalupe
 ********************************************************************************/
 
-#ifndef _TIMER_H_
-#define _TIMER_H_
+#ifndef _ELECTROVALVULA_H_
+#define _ELECTROVALVULA_H_
 
 /*******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
 
+
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
  ******************************************************************************/
-#define SEC_2_MSEC(x) ((x)*1000)
-#define MOTOR_TIMER 1
-#define ELECTROVALVULA_TIMER 2
+
 
 /*******************************************************************************
  * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
@@ -32,25 +31,18 @@
  ******************************************************************************/
 
 /**
- * @brief Se encarga de iniciar el temporizador.
+ * @brief Initialize vumeter, changing led colors and starting vumeter in "on" mode.
  * @return void
  */
-void startTimer(int id, unsigned long miliseconds, void (*callback)());
+void initElectrovalvula(void);
 
 /**
- * @brief Se encarga de parar el temporizador.
+ * @brief Initialize vumeter, changing led colors and starting vumeter in "on" mode.
  * @return void
  */
-void stopTimer(int id);
-
-/**
- * @brief Revisa el estado de los temporizadores y muestra el tiempo restante.
- * @return void
- */
-void updateTimers();
-
+void openElectrovalvula(int seconds);
 
 /*******************************************************************************
  ******************************************************************************/
 
-#endif // _TIMER_H_
+#endif // _ELECTROVALVULA_H_

@@ -227,16 +227,16 @@ static bool checkTimer(void){
 
 static bool weightPlates(void){
     //Uso BALANZA_1 para comida y BALANZA_2 para agua
-    if(updateBalanza(BALANZA_1)){
+    if(updateBalanza(BALANZA_COMIDA)){
         return true;
-        if(updateBalanza(BALANZA_2)){
+        if(updateBalanza(BALANZA_AGUA)){
             return true;
         }
         else{
             balanzaState = NO_WATER;
         }
     }
-    else if(updateBalanza(BALANZA_2)){
+    else if(updateBalanza(BALANZA_AGUA)){
         balanzaState = NO_FOOD;
     }
     else{

@@ -21,40 +21,49 @@
 /*******************************************************************************
  * VARIABLE PROTOTYPES WITH LOCAL SCOPE
  ******************************************************************************/
-HX711 celda1;
-HX711 celda2;
+HX711 celdaComida;
+HX711 celdaAgua;
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES WITH GLOBAL SCOPE
  ******************************************************************************/
-void initBalanza(void) {
+void initBalanzas(void) {
     Serial.begin(9600);
 
-    celda1.begin(PIN_DT1, PIN_SCK1);
-    celda2.begin(PIN_DT2, PIN_SCK2);
+    celdaComida.begin(PIN_DT_COMIDA, PIN_SCK_COMIDA);
+    celdaAgua.begin(PIN_DT_AGUA, PIN_SCK_AGUA);
 
-    celda1.set_scale(SCALE);
-    celda1.tare();
+    celdaComida.set_scale(SCALE);
+    celdaComida.tare();
 
-    celda2.set_scale(SCALE);
-    celda2.tare();
+    celdaAgua.set_scale(SCALE);
+    celdaAgua.tare();
 }
 
 bool updateBalanza(int balanzaNum) {
-    if(balanzaNum == BALANZA_1){
-        if(celda1.get_units(10) > MIN_weight){
+    if(balanzaNum == BALANZA_COMIDA){
+        if(celdaComida.get_units(10) > MIN_weight){
             return false;
         }
         return true;
     }
-    else if(balanzaNum == BALANZA_2){
-        if(celda2.get_units(10) > MIN_weight){
+    else if(balanzaNum == BALANZA_AGUA){
+        if(celdaAgua.get_units(10) > MIN_weight){
             return false;
         }
         return true;
     }
     return true;
   
+}
+
+float pesar(int balanzaNum){
+    if(balanzaNum == BALANZA_COMIDA){
+        return celdaComida.get_units(10);
+    }
+    else if(balanzaNum == BALANZA_AGUA){
+        return celdaAgua.get_units(10);
+    }
 }
 
 /*******************************************************************************
