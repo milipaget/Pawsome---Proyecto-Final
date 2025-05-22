@@ -9,6 +9,11 @@
 #define _FSM_H_
 
 /*******************************************************************************
+ * INCLUDE HEADER FILES
+ ******************************************************************************/
+#include "../include/Variables/variables.hpp"
+
+/*******************************************************************************
  * FUNCTION PROTOTYPES WITH GLOBAL SCOPE
  ******************************************************************************/
 
@@ -16,7 +21,7 @@
  * @brief Esta función se encarga de inicializar la máquina de estados.
  * @return void
  */
-void FSM_GetInitState(void);
+void FSM_GetInitState(Variables variables);
 
 /**
  * @brief Esta función se encarga de actualizar el estado de la máquina de estados 

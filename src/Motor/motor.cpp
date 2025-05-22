@@ -14,11 +14,6 @@
 #include "../include/Pinout/pinout.hpp"
 
 /*******************************************************************************
- * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
- ******************************************************************************/
-#define MAX_time    3000//en milisegundos
-
-/*******************************************************************************
  * LOCAL FUNCTION DEFINITION
  ******************************************************************************/
 void motorOFF(void);
@@ -60,7 +55,7 @@ void motorOFF(void){
 
 void turnMotor(void){
     digitalWrite(PIN_ENA, HIGH);
-    delay(MAX_time);
+    delay(MOTOR_time);
     Serial.println("motor on :D");
     digitalWrite(PIN_ENA, LOW);
     Serial.println("chau motor");

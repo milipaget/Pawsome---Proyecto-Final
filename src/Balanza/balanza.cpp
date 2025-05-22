@@ -15,8 +15,9 @@
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
  ******************************************************************************/
-#define SCALE 2213.f
-#define MIN_weight 0.5
+#define SCALE 1023.44f
+#define MIN_weight 0.0
+#define PLATO 27.5 //peso del plato de comida
 
 /*******************************************************************************
  * VARIABLE PROTOTYPES WITH LOCAL SCOPE
@@ -28,7 +29,7 @@ HX711 celdaAgua;
  * FUNCTION PROTOTYPES WITH GLOBAL SCOPE
  ******************************************************************************/
 void initBalanzas(void) {
-    Serial.begin(9600);
+    //Serial.begin(9600);
 
     celdaComida.begin(PIN_DT_COMIDA, PIN_SCK_COMIDA);
     celdaAgua.begin(PIN_DT_AGUA, PIN_SCK_AGUA);
@@ -38,17 +39,19 @@ void initBalanzas(void) {
 
     celdaAgua.set_scale(SCALE);
     celdaAgua.tare();
+
+    delay(2000);
 }
 
 bool updateBalanza(int balanzaNum) {
     if(balanzaNum == BALANZA_COMIDA){
-        if(celdaComida.get_units(10) > MIN_weight){
+        if((celdaComida.get_units(10) - PLATO) > MIN_weight){
             return false;
         }
         return true;
     }
     else if(balanzaNum == BALANZA_AGUA){
-        if(celdaAgua.get_units(10) > MIN_weight){
+        if((celdaAgua.get_units(10) - PLATO) > MIN_weight){
             return false;
         }
         return true;

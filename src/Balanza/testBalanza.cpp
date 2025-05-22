@@ -21,23 +21,22 @@
 /*******************************************************************************
  * FUNCTION DEFINITIONS WITH GLOBAL SCOPE
  ******************************************************************************/
-void setup() {
+/*void setup() {
    Serial.begin(115200);
    initBalanzas();
-   Serial.println("Balanzas listas");
- }
- 
+ }*/
+ /*
  void loop() {
    float peso1 = pesar(BALANZA_COMIDA);
-   float peso2 = pesar(BALANZA_AGUA);
+   //float peso2 = pesar(BALANZA_AGUA);
  
-   Serial.print("Balanza 1: ");
-   Serial.print(peso1);
-   Serial.print(" g | Balanza 2: ");
-   Serial.println(peso2);
- 
+   Serial.println("Balanza 1: ");
+   Serial.println(peso1);
+   /*Serial.print(" g | Balanza 2: ");
+   Serial.println(peso2);*/
+ /*
    delay(1000);
- }
+ }*/
 
 /*******************************************************************************
  ******************************************************************************/

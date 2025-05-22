@@ -18,6 +18,7 @@
 #define SEC_2_MSEC(x) ((x)*1000)
 #define MOTOR_TIMER 1
 #define ELECTROVALVULA_TIMER 2
+#define FOOD_TIMER 3
 
 /*******************************************************************************
  * ENUMERATIONS AND STRUCTURES AND TYPEDEFS

@@ -15,6 +15,8 @@
 #include "../include/Notificaciones/notificaciones.hpp"
 #include "../include/Sensor infrarrojo/sensor_infra.hpp"
 #include "../include/Motor/motor.hpp"
+#include "../include/Timer/timer.hpp"
+#include "../include/Electrovalvula/electrovalvula.hpp"
 #include <Arduino.h>
 
 /*******************************************************************************
@@ -44,10 +46,10 @@ enum{IDLE, FILL_PLATES, PLATES_EMPTY, CHECK_CONTAINERS, REPORT_ERROR};
  ******************************************************************************/
 static bool foodAvailable;
 static bool waterAvailable;
-//static bool mode; // true es TIEMPO, false es DEMANDA
 static int balanzaState = NO_FOOD_NO_WATER;
 static int errorState;
 static int currentState;
+static bool foodTimerReady;
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES WITH LOCAL SCOPE
@@ -80,7 +82,7 @@ static bool findPet(void);
  * @brief Esta función se encarga de ver si terminó el timer.
  * @return bool
  */
-static bool checkTimer(void);
+static void foodTimerCallback (void);
 
 /**
  * @brief Esta función se encarga de ver si los platos ya tienen comida.
@@ -100,6 +102,7 @@ static bool isThereSomething(void);
  */
 static bool checkAvailability(void);
 
+
 /*******************************************************************************
  * FUNCTION DEFINITIONS WITH GLOBAL SCOPE
  ******************************************************************************/
@@ -107,10 +110,12 @@ void fsm(bool mode){
     switch (currentState)
     {
     case IDLE:
-        /*if(mode?checkTimer():findPet())*/
-        if(findPet()){
+        if(mode?foodTimerReady:findPet()){
             currentState = FILL_PLATES;
             Serial.println("Paso a FILL_PLATES :P");
+            if(foodTimerReady){
+                foodTimerReady = false; //Reseteo el flag
+            }
         }
         break;
     case FILL_PLATES:
@@ -150,8 +155,12 @@ void fsm(bool mode){
     }
 }
 
-void FSM_GetInitState(void){
+void FSM_GetInitState(Variables variables){
  	currentState = CHECK_CONTAINERS; //Para que inicialice el estado de foodAvailable y waterAvailable 
+    foodTimerReady = false;
+    if(variables.mode){
+        startTimer(FOOD_TIMER, SEC_2_MSEC(variables.timerDuration), foodTimerCallback);
+    }
 }
 
 /*******************************************************************************
@@ -160,19 +169,20 @@ void FSM_GetInitState(void){
 //static void do_nothing(void){}
 
 static void startFilling(void){
+    //Después hay que pensar un método para que se llene. Tipo pesar en el medio o algo así :D
+    //O que con el peso que sacó sepa cuantos segundos abrir :) me gusta más esta
     switch (balanzaState)
     {
     case NO_FOOD:
-        turnMotor();
+        motorON(MOTOR_time);
         break;
     case NO_WATER:
-        //función que hace que la válvula se abra :)
+        openElectrovalvula(ELECTROVALVULA_time);
         break;
     case NO_FOOD_NO_WATER:
-        //función que hace que el motor gire y la válvula se abra:)
-        turnMotor();
+        motorON(MOTOR_time);
+        openElectrovalvula(ELECTROVALVULA_time);
         break;
-    
     default:
         break;
     }
@@ -214,15 +224,6 @@ static bool findPet(void){
         return true;
     }
     return false;
-}
-
-static bool checkTimer(void){
-    if(/*función que me lee la variable del timer*/true){
-        return true;
-    }
-    else{
-        return false;
-    }
 }
 
 static bool weightPlates(void){
@@ -286,4 +287,9 @@ static bool checkAvailability(void){
         break;
     }
     return false;
+}
+
+void foodTimerCallback (void){
+    currentState = IDLE;
+    foodTimerReady = true;
 }
